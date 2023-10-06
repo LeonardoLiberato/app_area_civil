@@ -1,0 +1,32 @@
+#Este programa permite calcular a quantidade de tijolos, cimento e areia necessária com base na área e
+# altura da parede. Lembre-se de que esses valores são apenas estimativas e podem variar.
+
+def calcular_materiais_para_casa(area_parede, altura_parede):
+    # Dados de referência
+    tijolos_por_metro_quadrado = 50  # Quantidade de tijolos por metro quadrado
+    espessura_parede = 0.1  # Espessura da parede em metros
+    rendimento_cimento_por_metro_cubico = 0.02  # Rendimento de cimento por metro cúbico
+    rendimento_areia_por_metro_cubico = 0.05  # Rendimento de areia por metro cúbico
+
+    # Cálculo da quantidade de tijolos necessária
+    area_total = area_parede * altura_parede
+    quantidade_tijolos = area_total * tijolos_por_metro_quadrado
+
+    # Cálculo da quantidade de cimento e areia necessária
+    volume_parede = area_total * espessura_parede
+    quantidade_cimento = volume_parede * rendimento_cimento_por_metro_cubico
+    quantidade_areia = volume_parede * rendimento_areia_por_metro_cubico
+
+    return quantidade_tijolos, quantidade_cimento, quantidade_areia
+
+# Solicitar dados ao usuário
+area_parede = float(input("Digite a área da parede em metros quadrados: "))
+altura_parede = float(input("Digite a altura da parede em metros: "))
+
+# Calcular materiais
+quantidade_tijolos, quantidade_cimento, quantidade_areia = calcular_materiais_para_casa(area_parede, altura_parede)
+
+# Exibir resultados
+print(f"Quantidade de tijolos necessária: {quantidade_tijolos} tijolos")
+print(f"Quantidade de cimento necessária: {quantidade_cimento:.2f} metros cúbicos")
+print(f"Quantidade de areia necessária: {quantidade_areia:.2f} metros cúbicos")

@@ -1,0 +1,106 @@
+
+
+class Projeto:
+    def __init__(self, nome, endereco, data_inicio, data_conclusao):
+        self.nome = nome
+        self.endereco = endereco
+        self.data_inicio = data_inicio
+        self.data_conclusao = data_conclusao
+        self.tarefas = []
+
+    def adicionar_tarefa(self, tarefa):
+        self.tarefas.append(tarefa)
+
+    def listar_tarefas(self):
+        for i, tarefa in enumerate(self.tarefas, 1):
+            print(f"{i}. {tarefa}")
+
+class Tarefa:
+    def __init__(self, descricao, data_inicio, data_conclusao):
+        self.descricao = descricao
+        self.data_inicio = data_inicio
+        self.data_conclusao = data_conclusao
+        self.concluida = False
+
+    def marcar_como_concluida(self):
+        self.concluida = True
+
+    def __str__(self):
+        status = "Concluída" if self.concluida else "Pendente"
+        return f"{self.descricao} ({status})"
+
+def main():
+    projetos = []
+
+    while True:
+        print("\nSistema de Gestão de Projetos de Construção Civil")
+        print("1. Criar projeto")
+        print("2. Listar projetos")
+        print("3. Sair")
+        
+        escolha = input("Escolha uma opção: ")
+
+        if escolha == "1":
+            nome = input("Digite o nome do projeto: ")
+            endereco = input("Digite o endereço do projeto: ")
+            data_inicio = input("Digite a data de início (dd/mm/aaaa): ")
+            data_conclusao = input("Digite a data de conclusão (dd/mm/aaaa): ")
+
+            projeto = Projeto(nome, endereco, data_inicio, data_conclusao)
+            projetos.append(projeto)
+
+            print(f"Projeto '{nome}' criado com sucesso!")
+
+        elif escolha == "2":
+            if not projetos:
+                print("Nenhum projeto cadastrado.")
+            else:
+                print("\nLista de Projetos:")
+                for i, projeto in enumerate(projetos, 1):
+                    print(f"{i}. {projeto.nome}")
+                escolha_projeto = input("Digite o número do projeto para ver as tarefas (ou '0' para voltar): ")
+                if escolha_projeto == "0":
+                    continue
+                elif escolha_projeto.isdigit() and 1 <= int(escolha_projeto) <= len(projetos):
+                    projeto_selecionado = projetos[int(escolha_projeto) - 1]
+                    print(f"\nDetalhes do Projeto '{projeto_selecionado.nome}':")
+                    print(f"Endereço: {projeto_selecionado.endereco}")
+                    print(f"Data de Início: {projeto_selecionado.data_inicio}")
+                    print(f"Data de Conclusão: {projeto_selecionado.data_conclusao}")
+
+                    while True:
+                        print("\nTarefas:")
+                        projeto_selecionado.listar_tarefas()
+                        print("\n1. Adicionar tarefa")
+                        print("2. Marcar tarefa como concluída")
+                        print("3. Voltar")
+                        
+                        escolha_tarefa = input("Escolha uma opção: ")
+                        
+                        if escolha_tarefa == "1":
+                            descricao_tarefa = input("Digite a descrição da tarefa: ")
+                            data_inicio_tarefa = input("Digite a data de início (dd/mm/aaaa): ")
+                            data_conclusao_tarefa = input("Digite a data de conclusão (dd/mm/aaaa): ")
+                            tarefa = Tarefa(descricao_tarefa, data_inicio_tarefa, data_conclusao_tarefa)
+                            projeto_selecionado.adicionar_tarefa(tarefa)
+                            print(f"Tarefa '{descricao_tarefa}' adicionada ao projeto '{projeto_selecionado.nome}'!")
+
+                        elif escolha_tarefa == "2":
+                            numero_tarefa = input("Digite o número da tarefa a ser marcada como concluída: ")
+                            if numero_tarefa.isdigit() and 1 <= int(numero_tarefa) <= len(projeto_selecionado.tarefas):
+                                tarefa = projeto_selecionado.tarefas[int(numero_tarefa) - 1]
+                                tarefa.marcar_como_concluida()
+                                print(f"Tarefa '{tarefa.descricao}' marcada como concluída!")
+
+                        elif escolha_tarefa == "3":
+                            break
+
+        elif escolha == "3":
+            print("Obrigado por usar o Sistema de Gestão de Projetos de Construção Civil!")
+            break
+
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    main()

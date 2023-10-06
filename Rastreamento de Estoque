@@ -1,0 +1,47 @@
+#um esboço simplificado de um programa de rastreamento de estoque em Python
+
+class MaterialConstrucao:
+    def __init__(self, nome, quantidade, preco, fornecedor):
+        self.nome = nome
+        self.quantidade = quantidade
+        self.preco = preco
+        self.fornecedor = fornecedor
+
+class EstoqueMateriais:
+    def __init__(self):
+        self.materiais = []
+
+    def adicionar_material(self, material):
+        self.materiais.append(material)
+
+    def remover_material(self, nome):
+        for material in self.materiais:
+            if material.nome == nome:
+                self.materiais.remove(material)
+
+    def atualizar_material(self, nome, nova_quantidade, novo_preco, novo_fornecedor):
+        for material in self.materiais:
+            if material.nome == nome:
+                material.quantidade = nova_quantidade
+                material.preco = novo_preco
+                material.fornecedor = novo_fornecedor
+
+    def listar_materiais(self):
+        for material in self.materiais:
+            print(f"Nome: {material.nome}, Quantidade: {material.quantidade}, Preço: {material.preco}, Fornecedor: {material.fornecedor}")
+
+# Exemplo de uso
+estoque = EstoqueMateriais()
+
+material1 = MaterialConstrucao("Cimento", 100, 10.99, "Fornecedor A")
+material2 = MaterialConstrucao("Tijolos", 5000, 0.25, "Fornecedor B")
+
+estoque.adicionar_material(material1)
+estoque.adicionar_material(material2)
+
+estoque.listar_materiais()
+
+estoque.remover_material("Cimento")
+estoque.atualizar_material("Tijolos", 4000, 0.30, "Fornecedor C")
+
+estoque.listar_materiais()

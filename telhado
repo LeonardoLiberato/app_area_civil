@@ -1,0 +1,25 @@
+#Este programa calculará a quantidade de telhas com base das informações que receber
+
+import math
+
+# Função para calcular a quantidade de telhas necessárias
+def calcular_quantidade_telhas(area_telhado, altura_telha, inclinacao_telha):
+    # Calcula a área de uma telha individual
+    area_telha = altura_telha * largura_telha
+
+    # Calcula a quantidade de telhas necessárias
+    quantidade_telhas = math.ceil(area_telhado / area_telha)
+
+    return quantidade_telhas
+
+# Entradas do usuário (substitua pelos valores reais)
+largura_telha = float(input("Largura da telha (metros): "))
+altura_telha = float(input("Altura da telha (metros): "))
+inclinacao_telha = float(input("Ângulo de inclinação da telha (graus): "))
+area_telhado = float(input("Área total do telhado (metros quadrados): "))
+
+# Chama a função para calcular a quantidade de telhas
+quantidade_telhas = calcular_quantidade_telhas(area_telhado, altura_telha, inclinacao_telha)
+
+# Exibe o resultado
+print(f"Você precisa comprar {quantidade_telhas} telhas para construir o telhado.")

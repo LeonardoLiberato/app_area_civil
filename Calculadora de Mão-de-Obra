@@ -1,0 +1,44 @@
+#O programa calculará o custo total da mão-de-obra para todos os funcionários e fornecerá um resumo detalhado. 
+
+class Funcionario:
+    def __init__(self, nome, horas_trabalhadas, taxa_por_hora, impostos, beneficios):
+        self.nome = nome
+        self.horas_trabalhadas = horas_trabalhadas
+        self.taxa_por_hora = taxa_por_hora
+        self.impostos = impostos
+        self.beneficios = beneficios
+
+    def calcular_custo_mao_de_obra(self):
+        salario_bruto = self.horas_trabalhadas * self.taxa_por_hora
+        custo_total = salario_bruto + self.beneficios - self.impostos
+        return custo_total
+
+def main():
+    funcionarios = []
+
+    # Solicitar informações sobre os funcionários
+    num_funcionarios = int(input("Informe o número de funcionários: "))
+
+    for i in range(num_funcionarios):
+        nome = input(f"Nome do funcionário {i + 1}: ")
+        horas = float(input(f"Horas trabalhadas por {nome}: "))
+        taxa = float(input(f"Taxa por hora para {nome}: "))
+        impostos = float(input(f"Impostos para {nome} (%): ")) / 100
+        beneficios = float(input(f"Benefícios para {nome} (%): ")) / 100
+
+        funcionario = Funcionario(nome, horas, taxa, impostos, beneficios)
+        funcionarios.append(funcionario)
+
+    # Calcular o custo da mão-de-obra para cada funcionário e exibir um resumo
+    total_custo_mao_de_obra = 0
+
+    print("\nResumo dos Custos de Mão-de-Obra:")
+    for funcionario in funcionarios:
+        custo = funcionario.calcular_custo_mao_de_obra()
+        total_custo_mao_de_obra += custo
+        print(f"{funcionario.nome}: R$ {custo:.2f}")
+
+    print(f"\nCusto Total da Mão-de-Obra: R$ {total_custo_mao_de_obra:.2f}")
+
+if __name__ == "__main__":
+    main()

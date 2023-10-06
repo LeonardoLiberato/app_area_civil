@@ -1,0 +1,32 @@
+#Uma calculadora básica de dimensionamento de vigas em Python usando a biblioteca SciPy:
+
+import scipy.constants as const
+from scipy.optimize import fsolve
+
+# Função para calcular a área da seção transversal da viga
+def calcular_area_viga(carga, momento_fletor):
+    # Defina as propriedades do material
+    resistencia_material = 250  # Resistência do material em MPa
+    largura = 0.15  # Largura da viga em metros
+
+    # Função para calcular a área da seção transversal
+    def equacao_area(secao):
+        area = secao[0]
+        momento_inercia = (1/3) * largura * (area**3)
+        tensao_maxima = (momento_fletor * const.g) / momento_inercia
+        return tensao_maxima - (carga / area)
+
+    # Use o fsolve para encontrar a área da seção transversal
+    area_inicial = 0.01  # Valor inicial da área
+    area_sol = fsolve(equacao_area, area_inicial)
+    return area_sol[0]
+
+# Inputs do usuário
+carga = float(input("Informe a carga (em Newtons): "))
+momento_fletor = float(input("Informe o momento fletor (em Nm): "))
+
+# Calcular a área da seção transversal da viga
+area_viga = calcular_area_viga(carga, momento_fletor)
+
+# Exibir os resultados
+print(f"A área da seção transversal da viga necessária é {area_viga:.2f} metros quadrados.")

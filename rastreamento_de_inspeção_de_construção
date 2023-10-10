@@ -1,0 +1,62 @@
+#Este é um exemplo simplificado de um sistema de rastreamento de certificados
+# de inspeção de construção em Python
+
+import datetime
+
+# Definir uma classe para representar os certificados de inspeção
+class Certificate:
+    def __init__(self, id, construction_site, inspector, inspection_date):
+        self.id = id
+        self.construction_site = construction_site
+        self.inspector = inspector
+        self.inspection_date = inspection_date
+
+# Definir uma classe para o sistema de rastreamento
+class CertificateTrackingSystem:
+    def __init__(self):
+        self.certificates = []
+
+    def add_certificate(self, construction_site, inspector, inspection_date):
+        certificate_id = len(self.certificates) + 1
+        certificate = Certificate(certificate_id, construction_site, inspector, inspection_date)
+        self.certificates.append(certificate)
+
+    def search_certificate_by_id(self, certificate_id):
+        for certificate in self.certificates:
+            if certificate.id == certificate_id:
+                return certificate
+        return None
+
+    def search_certificates_by_date(self, start_date, end_date):
+        result = []
+        for certificate in self.certificates:
+            if start_date <= certificate.inspection_date <= end_date:
+                result.append(certificate)
+        return result
+
+# Criar uma instância do sistema de rastreamento
+tracking_system = CertificateTrackingSystem()
+
+# Adicionar certificados de exemplo
+tracking_system.add_certificate("Construção A", "Inspetor 1", datetime.date(2023, 1, 15))
+tracking_system.add_certificate("Construção B", "Inspetor 2", datetime.date(2023, 2, 20))
+tracking_system.add_certificate("Construção A", "Inspetor 3", datetime.date(2023, 3, 10))
+
+# Exemplo de uso:
+# Procurar certificado por ID
+certificate_id = 2
+certificate = tracking_system.search_certificate_by_id(certificate_id)
+if certificate:
+    print(f"Certificado {certificate.id}: {certificate.construction_site}, {certificate.inspection_date}")
+else:
+    print("Certificado não encontrado")
+
+# Procurar certificados por data
+start_date = datetime.date(2023, 1, 1)
+end_date = datetime.date(2023, 2, 28)
+certificates = tracking_system.search_certificates_by_date(start_date, end_date)
+print("Certificados no período:")
+for certificate in certificates:
+    print(f"Certificado {certificate.id}: {certificate.construction_site}, {certificate.inspection_date}")
+
+

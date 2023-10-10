@@ -1,0 +1,86 @@
+#Este é apenas um exemplo simplificado que você precisará adaptá-lo e expandi-lo de acordo 
+# com suas necessidades específicas.
+
+
+
+import sqlite3
+
+# Conectar-se ao banco de dados SQLite
+conn = sqlite3.connect('equipamentos.db')
+cursor = conn.cursor()
+
+# Criar tabela para equipamentos
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS equipamentos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        tipo TEXT,
+        numero_serie TEXT UNIQUE,
+        data_aquisicao DATE,
+        custo DECIMAL,
+        status TEXT
+    )
+''')
+conn.commit()
+
+# Função para adicionar um novo equipamento
+def adicionar_equipamento(nome, tipo, numero_serie, data_aquisicao, custo, status):
+    cursor.execute('''
+        INSERT INTO equipamentos (nome, tipo, numero_serie, data_aquisicao, custo, status)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (nome, tipo, numero_serie, data_aquisicao, custo, status))
+    conn.commit()
+
+# Função para listar todos os equipamentos
+def listar_equipamentos():
+    cursor.execute('SELECT * FROM equipamentos')
+    equipamentos = cursor.fetchall()
+    for equipamento in equipamentos:
+        print(equipamento)
+
+# Função para pesquisar equipamentos por nome
+def pesquisar_equipamento_por_nome(nome):
+    cursor.execute('SELECT * FROM equipamentos WHERE nome LIKE ?', ('%' + nome + '%',))
+    equipamentos = cursor.fetchall()
+    for equipamento in equipamentos:
+        print(equipamento)
+
+# Exemplo de uso
+if __name__ == '__main__':
+    while True:
+        print("\nSistema de Gestão de Equipamentos de Construção")
+        print("1. Adicionar Equipamento")
+        print("2. Listar Equipamentos")
+        print("3. Pesquisar Equipamentos por Nome")
+        print("4. Sair")
+        
+        escolha = input("Escolha uma opção: ")
+        
+        if escolha == '1':
+            nome = input("Nome do equipamento: ")
+            tipo = input("Tipo do equipamento: ")
+            numero_serie = input("Número de série: ")
+            data_aquisicao = input("Data de aquisição (AAAA-MM-DD): ")
+            custo = float(input("Custo: "))
+            status = input("Status: ")
+            adicionar_equipamento(nome, tipo, numero_serie, data_aquisicao, custo, status)
+            print("Equipamento adicionado com sucesso!")
+        elif escolha == '2':
+            listar_equipamentos()
+        elif escolha == '3':
+            nome = input("Digite o nome a ser pesquisado: ")
+            pesquisar_equipamento_por_nome(nome)
+        elif escolha == '4':
+            print("Saindo do sistema.")
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+
+#Este é um exemplo muito básico para iniciar. Você pode expandir este código para incluir recursos
+# como rastreamento de manutenção, geração de relatórios, autenticação de usuário, uma interface
+# gráfica mais sofisticada e muito mais.
+
+#Para criar um sistema melhor pode tentar inclementar esses itens (Modelagem de Dados/Banco de Dados/
+#       Interface de Usuário/Funcionalidades Básicas/Rastreamento de Manutenção/Geração de Relatórios/
+#       Autenticação e Autorização/Notificações e Alertas/Segurança/Integrações/Backup e Recuperação/
+#       Testes e Depuração/Documentação/Escalabilidade/Treinamento e Suporte)

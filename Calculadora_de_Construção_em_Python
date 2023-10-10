@@ -1,0 +1,45 @@
+#Este programa permite calcular a área de superfície e o volume de um cubo ou cilindro, dependendo
+# da escolha do usuário. Você pode expandi-lo adicionando mais formas geométricas e funcionalidades,
+# se necessário.
+
+import math
+
+def calcular_area_cubo(lado):
+    # Calcula a área superficial de um cubo
+    return 6 * lado**2
+
+def calcular_volume_cubo(lado):
+    # Calcula o volume de um cubo
+    return lado**3
+
+def calcular_area_cilindro(raio, altura):
+    # Calcula a área superficial de um cilindro
+    return 2 * math.pi * raio**2 + 2 * math.pi * raio * altura
+
+def calcular_volume_cilindro(raio, altura):
+    # Calcula o volume de um cilindro
+    return math.pi * raio**2 * altura
+
+# Função principal
+def main():
+    print("Calculadora de Áreas e Volumes de Construção")
+    escolha = input("Escolha a forma (cubo/cilindro): ").lower()
+
+    if escolha == "cubo":
+        lado = float(input("Informe o comprimento do lado do cubo: "))
+        area = calcular_area_cubo(lado)
+        volume = calcular_volume_cubo(lado)
+        print(f"A área superficial do cubo é {area} unidades quadradas.")
+        print(f"O volume do cubo é {volume} unidades cúbicas.")
+    elif escolha == "cilindro":
+        raio = float(input("Informe o raio da base do cilindro: "))
+        altura = float(input("Informe a altura do cilindro: "))
+        area = calcular_area_cilindro(raio, altura)
+        volume = calcular_volume_cilindro(raio, altura)
+        print(f"A área superficial do cilindro é {area} unidades quadradas.")
+        print(f"O volume do cilindro é {volume} unidades cúbicas.")
+    else:
+        print("Escolha inválida. Por favor, escolha 'cubo' ou 'cilindro'.")
+
+if __name__ == "__main__":
+    main()

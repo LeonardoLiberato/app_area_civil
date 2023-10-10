@@ -1,0 +1,33 @@
+# Lembre-se de que esse é apenas um exemplo básico e você pode expandi-lo conforme necessário.
+
+#Esta calculadora irá calcular o Índice de Eficiência Energética (IEE) com base em algumas entradas
+# simples, como consumo de energia e área do edifício.
+
+
+# Definir uma função para calcular o Índice de Eficiência Energética (IEE)
+def calcular_iee(consumo_energia, area_edificio):
+    # Fórmula básica do IEE
+    iee = consumo_energia / area_edificio
+    
+    # Retornar o valor do IEE
+    return iee
+
+# Solicitar as entradas do usuário
+consumo_energia = float(input("Informe o consumo anual de energia (em kWh): "))
+area_edificio = float(input("Informe a área total do edifício (em metros quadrados): "))
+
+# Calcular o IEE chamando a função
+iee_calculado = calcular_iee(consumo_energia, area_edificio)
+
+# Exibir o resultado
+print(f"O Índice de Eficiência Energética (IEE) do edifício é: {iee_calculado} kWh/m²")
+
+
+#Neste exemplo, o programa solicita ao usuário o consumo anual de energia em kWh e a área total do
+# edifício em metros quadrados. Ele então calcula o IEE dividindo o consumo de energia pela área
+# do edifício e exibe o resultado.
+
+#Você pode expandir este programa adicionando mais funcionalidades, como a capacidade de inserir 
+# dados de isolamento, tipo de aquecimento, janelas, etc., e usar algoritmos mais avançados para
+# calcular a eficiência energética com maior precisão. Além disso, pode criar uma interface gráfica
+# para torná-lo mais amigável ao usuário.

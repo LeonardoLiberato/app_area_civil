@@ -1,0 +1,53 @@
+#Este programa cria uma interface gráfica onde o usuário pode inserir o nome do cabo e a data de instalação.
+# Ao clicar no botão "Gerar Etiqueta", ele cria uma etiqueta personalizada em PDF usando a biblioteca ReportLab
+# e exibe o nome do arquivo gerado na interface.
+
+#lembrando que tem que baixar as bibliotecas Tkinter e ReportLab usando (pip install tkinter reportlab).
+
+import tkinter as tk
+from reportlab.pdfgen import canvas
+
+def generate_label():
+    cable_name = cable_name_entry.get()
+    installation_date = installation_date_entry.get()
+
+    # Configurações do PDF
+    pdf_filename = f"{cable_name}_label.pdf"
+    c = canvas.Canvas(pdf_filename)
+
+    # Tamanho da etiqueta (exemplo: 3x2 polegadas)
+    label_width, label_height = 3 * 72, 2 * 72
+
+    # Desenha a etiqueta
+    c.rect(0, 0, label_width, label_height)
+    c.drawString(10, label_height - 20, f"Cabo: {cable_name}")
+    c.drawString(10, label_height - 40, f"Data de Instalação: {installation_date}")
+
+    # Salva o PDF
+    c.save()
+
+    status_label.config(text=f"Etiqueta gerada: {pdf_filename}")
+
+    # Configuração da interface gráfica
+    root = tk.Tk()
+    root.title("Gerador de Etiquetas para Cabos Elétricos")
+
+    # Entrada de dados
+    cable_name_label = tk.Label(root, text="Nome do Cabo:")
+    cable_name_label.pack()
+    cable_name_entry = tk.Entry(root)
+    cable_name_entry.pack()
+
+    installation_date_label = tk.Label(root, text="Data de Instalação:")
+    installation_date_label.pack()
+    installation_date_entry = tk.Entry(root)
+    installation_date_entry.pack()
+
+    generate_button = tk.Button(root, text="Gerar Etiqueta", command=generate_label)
+    generate_button.pack()
+
+    status_label = tk.Label(root, text="")
+    status_label.pack()
+
+    root.mainloop()
+

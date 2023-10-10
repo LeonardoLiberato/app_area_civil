@@ -1,0 +1,46 @@
+#Este é um programa simples que solicita ao usuário a área da base da estrutura, a altura, 
+#o comprimento da estrutura e o diâmetro das barras de aço. Em seguida, calcula a quantidade 
+#de concreto e aço necessária com base nessas informações e exibe os resultados.
+
+#Este é apenas um exemplo básico para ilustrar o conceito. Certifique-se de consultar as normas de
+#engenharia apropriadas e adaptar o programa conforme necessário para projetos reais.
+
+#Lembre-se de que, na prática, a engenharia civil envolve muitos outros fatores e considerações,
+#como as especificações do tipo de concreto,o espaçamento das barras de aço, as cargas aplicadas,
+# entre outros. 
+
+
+# Importando bibliotecas
+import math
+
+# Função para calcular a quantidade de concreto
+def calcular_concreto(area_base, altura):
+    volume_concreto = area_base * altura
+    return volume_concreto
+
+# Função para calcular a quantidade de aço
+def calcular_aco(comprimento, diametro):
+    area_secao_transversal = (math.pi * (diametro / 2) ** 2)
+    quantidade_aco = area_secao_transversal * comprimento
+    return quantidade_aco
+
+# Função principal
+def main():
+    print("Calculadora de Quantidades de Concreto e Aço")
+
+    # Solicitar entrada do usuário
+    area_base = float(input("Área da base da estrutura (metros quadrados): "))
+    altura = float(input("Altura da estrutura (metros): "))
+    comprimento = float(input("Comprimento da estrutura (metros): "))
+    diametro_aco = float(input("Diâmetro da barra de aço (metros): "))
+
+    # Calcular a quantidade de concreto e aço
+    quantidade_concreto = calcular_concreto(area_base, altura)
+    quantidade_aco = calcular_aco(comprimento, diametro_aco)
+
+    # Exibir os resultados
+    print("\nQuantidade de Concreto necessária: {:.2f} metros cúbicos".format(quantidade_concreto))
+    print("Quantidade de Aço necessária: {:.2f} metros lineares".format(quantidade_aco))
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,21 @@
+#Este programa solicita ao usuário a área a ser demolida em metros quadrados e o custo por metro
+# quadrado de demolição. Em seguida, ele calcula e exibe o custo total da demolição
+
+def calcular_custo_demolicao():
+    # Solicitar informações do usuário
+    area_demolir = float(input("Informe a área a ser demolida em metros quadrados: "))
+    custo_por_metro_quadrado = float(input("Informe o custo por metro quadrado de demolição: R$ "))
+    
+    # Calcular o custo total
+    custo_total = area_demolir * custo_por_metro_quadrado
+    
+    # Exibir o resultado
+    print(f"O custo total de demolição será de R$ {custo_total:.2f}")
+
+if __name__ == "__main__":
+    print("Calculadora de Custos de Demolição")
+    calcular_custo_demolicao()
+
+
+#Lembre-se de que esse é apenas um programa básico e os custos reais 
+# de demolição podem variar dependendo de muitos fatores

@@ -1,0 +1,42 @@
+#Este é apenas um exemplo muito simples e básico de como você pode começar a criar uma ferramenta 
+# de cálculo de carga de vento. Para torná-lo avançado, você pode considerar a inclusão de cálculos
+# mais complexos, como perfis de vento, direção do vento variável e outras variáveis relevantes 
+# para a engenharia de estruturas.
+
+
+import math
+
+# Função para calcular a carga de vento em uma estrutura
+def calcular_carga_de_vento(altura, largura, coeficiente_arrasto, velocidade_vento):
+    # Área da superfície da estrutura
+    area = altura * largura
+
+    # Cálculo da carga de vento
+    carga_vento = 0.5 * coeficiente_arrasto * area * velocidade_vento**2
+
+    return carga_vento
+
+# Função para solicitar entrada do usuário
+def obter_entrada_usuario():
+    altura = float(input("Digite a altura da estrutura (metros): "))
+    largura = float(input("Digite a largura da estrutura (metros): "))
+    coeficiente_arrasto = float(input("Digite o coeficiente de arrasto da estrutura: "))
+    velocidade_vento = float(input("Digite a velocidade do vento (m/s): "))
+
+    return altura, largura, coeficiente_arrasto, velocidade_vento
+
+# Função principal
+def main():
+    print("Ferramenta de Cálculo de Carga de Vento em Estruturas")
+    altura, largura, coeficiente_arrasto, velocidade_vento = obter_entrada_usuario()
+    carga_vento = calcular_carga_de_vento(altura, largura, coeficiente_arrasto, velocidade_vento)
+    print(f"A carga de vento na estrutura é de {carga_vento} Newtons.")
+
+if __name__ == "__main__":
+    main()
+
+
+
+# Com uma interface gráfica ou integração com software de modelagem 3D pode ser desejável para tornar 
+# a ferramenta mais amigável e funcional. Este é um projeto extenso que exigirá pesquisa e testes
+# cuidadosos para garantir a precisão e a utilidade da ferramenta.

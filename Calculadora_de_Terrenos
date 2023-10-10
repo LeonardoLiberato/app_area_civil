@@ -1,0 +1,75 @@
+#Este programa permite que você insira coordenadas (x, y) para calcular distâncias entre pontos 
+# e também calcular áreas de terrenos retangulares. 
+
+import tkinter as tk
+from math import sqrt
+
+def calcular_distancia():
+    x1 = float(entry_x1.get())
+    y1 = float(entry_y1.get())
+    x2 = float(entry_x2.get())
+    y2 = float(entry_y2.get())
+
+    distancia = sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    resultado_distancia.config(text=f"Distância: {distancia:.2f} metros")
+
+def calcular_area():
+    base = float(entry_base.get())
+    altura = float(entry_altura.get())
+
+    area = base * altura
+    resultado_area.config(text=f"Área: {area:.2f} metros quadrados")
+
+# Configuração da interface gráfica
+root = tk.Tk()
+root.title("Calculadora de Terrenos")
+
+frame_distancia = tk.Frame(root)
+frame_distancia.pack()
+
+label_x1 = tk.Label(frame_distancia, text="Coordenada x1:")
+label_x1.pack()
+entry_x1 = tk.Entry(frame_distancia)
+entry_x1.pack()
+
+label_y1 = tk.Label(frame_distancia, text="Coordenada y1:")
+label_y1.pack()
+entry_y1 = tk.Entry(frame_distancia)
+entry_y1.pack()
+
+label_x2 = tk.Label(frame_distancia, text="Coordenada x2:")
+label_x2.pack()
+entry_x2 = tk.Entry(frame_distancia)
+entry_x2.pack()
+
+label_y2 = tk.Label(frame_distancia, text="Coordenada y2:")
+label_y2.pack()
+entry_y2 = tk.Entry(frame_distancia)
+entry_y2.pack()
+
+btn_calcular_distancia = tk.Button(frame_distancia, text="Calcular Distância", command=calcular_distancia)
+btn_calcular_distancia.pack()
+
+resultado_distancia = tk.Label(frame_distancia, text="")
+resultado_distancia.pack()
+
+frame_area = tk.Frame(root)
+frame_area.pack()
+
+label_base = tk.Label(frame_area, text="Base:")
+label_base.pack()
+entry_base = tk.Entry(frame_area)
+entry_base.pack()
+
+label_altura = tk.Label(frame_area, text="Altura:")
+label_altura.pack()
+entry_altura = tk.Entry(frame_area)
+entry_altura.pack()
+
+btn_calcular_area = tk.Button(frame_area, text="Calcular Área", command=calcular_area)
+btn_calcular_area.pack()
+
+resultado_area = tk.Label(frame_area, text="")
+resultado_area.pack()
+
+root.mainloop()

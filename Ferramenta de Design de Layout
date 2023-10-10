@@ -1,0 +1,60 @@
+#programa que permite ao usuário adicionar salas a um layout e visualizar o resultado.
+
+class Sala:
+    def __init__(self, nome, largura, comprimento):
+        self.nome = nome
+        self.largura = largura
+        self.comprimento = comprimento
+
+class LayoutConstrucao:
+    def __init__(self):
+        self.salas = []
+
+    def adicionar_sala(self, sala):
+        self.salas.append(sala)
+
+    def calcular_area_total(self):
+        area_total = 0
+        for sala in self.salas:
+            area_total += sala.largura * sala.comprimento
+        return area_total
+
+    def mostrar_layout(self):
+        print("Layout de Construção:")
+        for sala in self.salas:
+            print(f"Sala: {sala.nome}, Largura: {sala.largura}m, Comprimento: {sala.comprimento}m")
+
+layout = LayoutConstrucao()
+
+while True:
+    print("\nOpções:")
+    print("1. Adicionar Sala")
+    print("2. Calcular Área Total")
+    print("3. Mostrar Layout")
+    print("4. Sair")
+
+    escolha = input("Escolha uma opção: ")
+
+    if escolha == '1':
+        nome = input("Nome da Sala: ")
+        largura = float(input("Largura da Sala (em metros): "))
+        comprimento = float(input("Comprimento da Sala (em metros): "))
+        sala = Sala(nome, largura, comprimento)
+        layout.adicionar_sala(sala)
+        print(f"Sala {nome} adicionada ao layout.")
+    elif escolha == '2':
+        area_total = layout.calcular_area_total()
+        print(f"Área total do layout: {area_total} metros quadrados.")
+    elif escolha == '3':
+        layout.mostrar_layout()
+    elif escolha == '4':
+        break
+    else:
+        print("Opção inválida. Por favor, escolha uma opção válida.")
+
+print("O programa foi encerrado.")
+
+#Este programa permite que crie um layout de construção civil, adicionando salas com nomes, larguras
+# e comprimentos. Você pode calcular a área total do layout e visualizar o layout criado. Basta 
+# executar este código em um ambiente Python para começar a usá-lo. Note que este é um exemplo 
+# simples e pode ser expandido com mais recursos, dependendo das suas necessidades.

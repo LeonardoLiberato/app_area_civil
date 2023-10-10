@@ -1,0 +1,36 @@
+#Este código criará um gráfico de barras horizontais que representa o cronograma de construção.
+ #Você pode adaptar e expandir este exemplo para incluir mais funcionalidades, como a interatividade,
+ #importação de dados de um arquivo CSV ou Excel e personalização estética avançada.
+
+#lembrando que tem que baixar a (pip install matplotlib)
+
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from datetime import datetime
+
+# Dados de exemplo do cronograma de construção
+tarefas = ["Escavação", "Fundação", "Estrutura", "Instalações", "Acabamento"]
+data_inicial = [datetime(2023, 10, 1), datetime(2023, 10, 5), datetime(2023, 10, 15), datetime(2023, 10, 25), datetime(2023, 11, 5)]
+duracao = [5, 10, 7, 10, 15]
+
+# Criação do gráfico Gantt
+fig, ax = plt.subplots(figsize=(10, 5))
+
+for i, tarefa in enumerate(tarefas):
+    ax.barh(tarefa, duracao[i], left=data_inicial[i], height=0.5, align='center', color='skyblue', edgecolor='black')
+
+ax.xaxis_date()
+ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=1))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
+plt.xlabel("Data")
+plt.ylabel("Tarefas")
+plt.title("Diagrama de Gantt - Cronograma de Construção")
+plt.grid(axis='x')
+
+plt.tight_layout()
+plt.show()
+
+
+#Lembre-se de que criar um gerador de diagrama de Gantt avançado para cronogramas de construção pode 
+# ser um projeto complexo, e este é apenas um ponto de partida simplificado. Você pode consideraro 
+# uso de bibliotecas especializadas para essa finalidade, dependendo da escala do seu projeto.

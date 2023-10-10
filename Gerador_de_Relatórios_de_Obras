@@ -1,0 +1,45 @@
+#Exemplo básico de código Python para começar a fazer um Gerador de relatórios de inspeção de obras
+
+class RelatorioInspecao:
+    def __init__(self, obra, data, inspetor):
+        self.obra = obra
+        self.data = data
+        self.inspetor = inspetor
+        self.itens = []
+
+    def adicionar_item(self, item):
+        self.itens.append(item)
+
+    def gerar_relatorio(self):
+        relatorio = f"Relatório de Inspeção de Obras\n"
+        relatorio += f"Obra: {self.obra}\n"
+        relatorio += f"Data: {self.data}\n"
+        relatorio += f"Inspetor: {self.inspetor}\n\n"
+        relatorio += "Itens inspecionados:\n"
+
+        for idx, item in enumerate(self.itens, start=1):
+            relatorio += f"{idx}. {item}\n"
+
+        return relatorio
+
+class ItemInspecao:
+    def __init__(self, descricao, status):
+        self.descricao = descricao
+        self.status = status
+
+    def __str__(self):
+        return f"{self.descricao}: {self.status}"
+
+# Exemplo de uso:
+relatorio = RelatorioInspecao("Construção da Ponte", "2023-10-06", "João")
+relatorio.adicionar_item(ItemInspecao("Verificação da estrutura", "Conforme"))
+relatorio.adicionar_item(ItemInspecao("Verificação da fundação", "Conforme"))
+
+print(relatorio.gerar_relatorio())
+
+
+#Para criar um programa avançado, você pode considerar a implementação de recursos
+# como armazenamento de dados em banco de dados, geração de gráficos, exportação 
+# para PDF ou outros formatos, entre outros. Você também pode usar bibliotecas 
+# externas como Flask ou Django para criar uma interface web para o seu aplicativo,
+# facilitando a interação com os usuários.

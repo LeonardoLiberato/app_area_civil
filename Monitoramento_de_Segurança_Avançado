@@ -1,0 +1,59 @@
+#Este é um projeto complexo que requer planejamento e implementação detalhados. 
+# #Certifique-se de cumprir todas as regulamentações de segurança e privacidade
+# ao implementar um sistema como este.
+
+#Este é apenas um esboço básico e você precisaria criar classes para os sensores (câmera, sensor de movimento, sensor de gás, sensor de temperatura) e implementar a lógica real de detecção e envio de alertas. Também é importante configurar adequadamente os métodos de envio de alertas, como email ou SMS.
+
+#Além disso, para um sistema de monitoramento de segurança no canteiro de obras, você pode considerar a integração de outros recursos como detecção de intrusão, controle de acesso, gravação de vídeo, entre outros, dependendo das necessidades específicas do projeto.
+
+import time
+import threading
+from sensors import Camera, MotionSensor, GasSensor, TemperatureSensor
+
+# Classe para gerenciar o sistema de monitoramento
+class SecuritySystem:
+    def __init__(self):
+        self.camera = Camera()
+        self.motion_sensor = MotionSensor()
+        self.gas_sensor = GasSensor()
+        self.temperature_sensor = TemperatureSensor()
+        self.alerts = []
+
+    def monitor(self):
+        while True:
+            # Verificar a câmera para atividade suspeita
+            if self.camera.detect_motion():
+                self.alerts.append("Atividade suspeita detectada na câmera!")
+
+            # Verificar o sensor de movimento
+            if self.motion_sensor.detect_motion():
+                self.alerts.append("Movimento detectado no canteiro de obras!")
+
+            # Verificar o sensor de gás
+            if self.gas_sensor.detect_gas_leak():
+                self.alerts.append("Vazamento de gás detectado!")
+
+            # Verificar o sensor de temperatura
+            if self.temperature_sensor.detect_overheat():
+                self.alerts.append("Sobreaquecimento detectado!")
+
+            # Enviar alertas por email ou SMS, se necessário
+            if self.alerts:
+                self.send_alerts(self.alerts)
+                self.alerts = []
+
+            # Esperar 10 segundos antes de verificar novamente
+            time.sleep(10)
+
+    def send_alerts(self, alerts):
+        # Implementar o envio de alertas por email ou SMS aqui
+        pass
+
+# Iniciar o sistema de monitoramento em uma thread separada
+if __name__ == "__main__":
+    security_system = SecuritySystem()
+    monitoring_thread = threading.Thread(target=security_system.monitor)
+    monitoring_thread.start()
+
+    # O sistema de monitoramento agora está em execução em segundo plano
+    # Você pode adicionar mais sensores e recursos conforme necessário
